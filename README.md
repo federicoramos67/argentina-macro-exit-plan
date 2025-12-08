@@ -16,6 +16,8 @@ All indicators come from the World Bank’s **World Development Indicators (WDI)
 - **Unemployment, total (% of total labor force) (modeled ILO estimate)** — code `SL.UEM.TOTL.ZS`, country `ARG`.  
 - **Poverty headcount ratio at national poverty lines (% of population)** — code `SI.POV.NAHC`, country `ARG`.  
 
+The processed CSV files used in this project (`inflation_ar.csv`, `unemployment_ar.csv`, `poverty_ar.csv`) are included in the `data/` folder of this repository for easy reproducibility.
+
 Each indicator was downloaded from the World Bank Data website (“Download CSV” for Argentina). The ZIP file contains three CSVs; the actual time‑series data is in the file starting with `API_...csv`, which was renamed to:
 
 - `inflation_ar.csv`  
@@ -27,16 +29,17 @@ The `Metadata_...` CSV files (indicator and country metadata) were not used in t
 ## Repository structure
 
 - `Argentina_macro_exit_plan.ipynb` – main analysis notebook (Python, pandas, matplotlib, seaborn).  
-- `data/` – folder where the three CSV files downloaded from the World Bank can be stored (not tracked in Git).  
+- `data/` – folder containing the three CSV files used in the analysis:
+  - `inflation_ar.csv`
+  - `unemployment_ar.csv`
+  - `poverty_ar.csv`
 
 ## How to run
 
-1. Download the three CSV files for Argentina (`FP.CPI.TOTL.ZG`, `SL.UEM.TOTL.ZS`, `SI.POV.NAHC`) from the World Bank Data website and save them as:
-   - `inflation_ar.csv`
-   - `unemployment_ar.csv`
-   - `poverty_ar.csv`
-2. Place the files in the `data/` folder or in the same directory as the notebook, and update the file paths in the data‑loading cell if needed.
+1. Clone or download this repository to your local machine.  
+2. Make sure the `data/` folder with the three CSV files (`inflation_ar.csv`, `unemployment_ar.csv`, `poverty_ar.csv`) is in the same directory as the notebook.  
 3. Open `Argentina_macro_exit_plan.ipynb` in Jupyter or Google Colab and run all cells from top to bottom.
+
 
 ## Key insights
 
