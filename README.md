@@ -1,14 +1,14 @@
 # Argentina macro: inflation, unemployment and poverty (1990–2024)
 
-## Overview (EN)
+## 📘 Overview (EN)
 
 This project analyzes how inflation, unemployment, and poverty evolved in Argentina from 1990 to 2024 using annual World Bank indicators. The notebook builds a cleaned dataset, visualizes the three series over time with government periods highlighted, and computes a simple correlation matrix to understand how these variables move together. The goal is to provide a clear, data‑driven picture of the macroeconomic context behind Argentina’s recurrent crises and to discuss what any potential “exit plan” should take into account.
 
-## Descripción (ES)
+## 📙 Descripción (ES)
 
 Este proyecto analiza cómo evolucionaron la inflación, el desempleo y la pobreza en Argentina entre 1990 y 2024 utilizando indicadores anuales del Banco Mundial. El notebook construye un dataset limpio, visualiza las tres series en el tiempo resaltando los periodos de gobierno y calcula una matriz de correlaciones para entender cómo se mueven estas variables. El objetivo es ofrecer una visión clara, basada en datos, del contexto macroeconómico detrás de las crisis recurrentes del país y discutir qué debería considerar cualquier posible “plan de salida”.
 
-## Data sources
+## 📊 Data sources
 
 All indicators come from the World Bank’s **World Development Indicators (WDI)** for Argentina:
 
@@ -26,7 +26,7 @@ Each indicator was downloaded from the World Bank Data website (“Download CSV�
 
 The `Metadata_...` CSV files (indicator and country metadata) were not used in the analysis.
 
-## Repository structure
+## 📁 Repository structure
 
 - `Argentina_macro_exit_plan.ipynb` – main analysis notebook (Python, pandas, matplotlib, seaborn).  
 - `data/` – folder containing the three CSV files used in the analysis:
@@ -34,14 +34,14 @@ The `Metadata_...` CSV files (indicator and country metadata) were not used in t
   - `unemployment_ar.csv`
   - `poverty_ar.csv`
 
-## How to run
+## ⚙️ How to run
 
 1. Clone or download this repository to your local machine.  
 2. Make sure the `data/` folder with the three CSV files (`inflation_ar.csv`, `unemployment_ar.csv`, `poverty_ar.csv`) is in the same directory as the notebook.  
 3. Open `Argentina_macro_exit_plan.ipynb` in Jupyter or Google Colab and run all cells from top to bottom.
 
 
-## Key insights
+## 🔎 Key insights
 
 - Argentina has struggled with high and volatile inflation for most of the period, with recent spikes harming real wages and savings.  
 - Poverty tends to increase during episodes of macroeconomic instability, not only when unemployment is high, highlighting the role of inflation and informal, low‑quality jobs.  
