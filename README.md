@@ -1,50 +1,55 @@
-# Argentina macro: inflation, unemployment and poverty (1990–2024)
+# Análisis Macroeconómico de Argentina (1990-2024)
 
-## 📘 Overview (EN)
+## 📘 Descripción
 
-This project analyzes how inflation, unemployment, and poverty evolved in Argentina from 1990 to 2024 using annual World Bank indicators. The notebook builds a cleaned dataset, visualizes the three series over time with government periods highlighted, and computes a simple correlation matrix to understand how these variables move together. The goal is to provide a clear, data‑driven picture of the macroeconomic context behind Argentina’s recurrent crises and to discuss what any potential “exit plan” should take into account.
+Este proyecto analiza la evolución de la inflación, el desempleo y la pobreza en Argentina utilizando indicadores anuales del Banco Mundial. El objetivo es ofrecer una visión clara y basada en datos del contexto macroeconómico detrás de las crisis recurrentes del país.
 
-## 📙 Descripción (ES)
+El análisis incluye:
+- Carga y limpieza de datos de indicadores del Banco Mundial.
+- Visualización de las series temporales, destacando los períodos de gobierno.
+- Cálculo de una matriz de correlación para entender cómo se interrelacionan estas variables.
 
-Este proyecto analiza cómo evolucionaron la inflación, el desempleo y la pobreza en Argentina entre 1990 y 2024 utilizando indicadores anuales del Banco Mundial. El notebook construye un dataset limpio, visualiza las tres series en el tiempo resaltando los periodos de gobierno y calcula una matriz de correlaciones para entender cómo se mueven estas variables. El objetivo es ofrecer una visión clara, basada en datos, del contexto macroeconómico detrás de las crisis recurrentes del país y discutir qué debería considerar cualquier posible “plan de salida”.
+## 📁 Estructura del Repositorio
 
-## 📊 Data sources
+El proyecto está organizado siguiendo una estructura estándar para proyectos de Data Science:
 
-All indicators come from the World Bank’s **World Development Indicators (WDI)** for Argentina:
+- `src/`: Contiene el script principal `main.py` con toda la lógica del análisis.
+- `data/`: Almacena los datasets originales (`inflation_ar.csv`, `unemployment_ar.csv`, `poverty_ar.csv`).
+- `notebooks/`: Incluye el notebook original `Argentina_macro_exit_plan.ipynb` como registro de la exploración inicial.
+- `reports/`: Guarda las visualizaciones generadas (`time_series.png`, `correlation_heatmap.png`).
+- `tests/`: Destinada a futuras pruebas unitarias.
+- `run.py`: Script para ejecutar el flujo de trabajo completo con un solo comando.
+- `requirements.txt`: Lista de dependencias de Python para una fácil instalación.
 
-- **Inflation, consumer prices (annual %)** — code `FP.CPI.TOTL.ZG`, country `ARG`.  
-- **Unemployment, total (% of total labor force) (modeled ILO estimate)** — code `SL.UEM.TOTL.ZS`, country `ARG`.  
-- **Poverty headcount ratio at national poverty lines (% of population)** — code `SI.POV.NAHC`, country `ARG`.  
+## ⚙️ Cómo Ejecutar el Análisis
 
-The processed CSV files used in this project (`inflation_ar.csv`, `unemployment_ar.csv`, `poverty_ar.csv`) are included in the `data/` folder of this repository for easy reproducibility.
+Para replicar este análisis, sigue estos pasos:
 
-Each indicator was downloaded from the World Bank Data website (“Download CSV” for Argentina). The ZIP file contains three CSVs; the actual time‑series data is in the file starting with `API_...csv`, which was renamed to:
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/tomas-heredia/argentina-macro-exit-plan.git
+   cd argentina-macro-exit-plan
+   ```
 
-- `inflation_ar.csv`  
-- `unemployment_ar.csv`  
-- `poverty_ar.csv`  
+2. **Instala las dependencias:**
+   Asegúrate de tener Python 3 instalado. Luego, instala las librerías necesarias ejecutando:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-The `Metadata_...` CSV files (indicator and country metadata) were not used in the analysis.
+3. **Ejecuta el análisis:**
+   Simplemente ejecuta el script `run.py` desde la raíz del proyecto:
+   ```bash
+   python run.py
+   ```
+   Tras la ejecución, los gráficos actualizados se guardarán en la carpeta `reports/`.
 
-## 📁 Repository structure
+## 📊 Fuentes de Datos
 
-- `Argentina_macro_exit_plan.ipynb` – main analysis notebook (Python, pandas, matplotlib, seaborn).  
-- `data/` – folder containing the three CSV files used in the analysis:
-  - `inflation_ar.csv`
-  - `unemployment_ar.csv`
-  - `poverty_ar.csv`
+Todos los indicadores provienen de los **Indicadores de Desarrollo Mundial (WDI)** del Banco Mundial para Argentina:
 
-## ⚙️ How to run
+- **Inflación, precios al consumidor (% anual)** - `FP.CPI.TOTL.ZG`
+- **Desempleo, total (% de la fuerza laboral total)** - `SL.UEM.TOTL.ZS`
+- **Tasa de pobreza (% de la población)** - `SI.POV.NAHC`
 
-1. Clone or download this repository to your local machine.  
-2. Make sure the `data/` folder with the three CSV files (`inflation_ar.csv`, `unemployment_ar.csv`, `poverty_ar.csv`) is in the same directory as the notebook.  
-3. Open `Argentina_macro_exit_plan.ipynb` in Jupyter or Google Colab and run all cells from top to bottom.
-
-
-## 🔎 Key insights
-
-- Argentina has struggled with high and volatile inflation for most of the period, with recent spikes harming real wages and savings.  
-- Poverty tends to increase during episodes of macroeconomic instability, not only when unemployment is high, highlighting the role of inflation and informal, low‑quality jobs.  
-- Stabilization policies need to balance fiscal and monetary discipline with social protection to be sustainable over time.  
-- Simple, well‑documented public data (like World Bank indicators) can already reveal which macro problems are structural and must be addressed across different governments.
-
+Los archivos CSV procesados se incluyen en la carpeta `data/` para facilitar la reproducibilidad.
