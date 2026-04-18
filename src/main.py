@@ -12,6 +12,7 @@ from .config import (
     DATA_DIR,
     END_YEAR,
     GOVERNMENTS,
+    IMAGES_DIR,
     MAX_INFLATION_PCT,
     MIN_POVERTY_PCT,
     MIN_UNEMPLOYMENT_PCT,
@@ -221,6 +222,49 @@ def plot_correlation_heatmap(df: pd.DataFrame, output_path: str | Path) -> None:
     logger.info("Correlation heatmap saved to %s", out_file)
 
 
+def plot_government_comparison(df: pd.DataFrame, output_path: str | Path) -> None:
+    """
+    Horizontal bar chart of average annual inflation per government period.
+    """
+    output_path = Path(output_path)
+
+    records = []
+    for start, end, label, color in GOVERNMENTS:
+        period = df[(df["year"] >= start) & (df["year"] < end)]
+        inf_mean = period["inflation"].mean()
+        if pd.notna(inf_mean):
+            records.append({"Gobierno": label, "Inflación promedio (%)": round(inf_mean, 1), "color": color})
+
+    gov_df = pd.DataFrame(records)
+
+    plt.style.use("seaborn-v0_8")
+    fig, ax = plt.subplots(figsize=(12, 6))
+    bars = ax.barh(
+        gov_df["Gobierno"],
+        gov_df["Inflación promedio (%)"],
+        color=gov_df["color"],
+        edgecolor="grey",
+        linewidth=0.6,
+    )
+    for bar, val in zip(bars, gov_df["Inflación promedio (%)"]):
+        ax.text(
+            val + 1,
+            bar.get_y() + bar.get_height() / 2,
+            f"{val:.1f}%",
+            va="center",
+            fontsize=10,
+        )
+    ax.set_xlabel("Inflación anual promedio (%)")
+    ax.set_title("Argentina: inflación promedio por gobierno (1990–2024)")
+    ax.grid(axis="x", alpha=0.4)
+
+    plt.tight_layout()
+    out_file = output_path / "government_comparison.png"
+    plt.savefig(out_file, dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info("Government comparison chart saved to %s", out_file)
+
+
 def export_report(df: pd.DataFrame, corr_stats: pd.DataFrame, output_path: str | Path) -> None:
     """
     Exports an HTML report with descriptive statistics and correlation table.
@@ -255,14 +299,18 @@ th{{background:#f0f0f0;}}
 def main() -> None:
     """Función principal para ejecutar el análisis completo."""
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
     df = load_and_clean_data()
     corr_stats = compute_statistics(df)
-    plot_time_series(df, REPORTS_DIR)
-    plot_correlation_heatmap(df, REPORTS_DIR)
-    export_report(df, corr_stats, REPORTS_DIR)
 
-    logger.info("Analysis complete. Output saved in '%s'.", REPORTS_DIR)
+    for out_dir in [REPORTS_DIR, IMAGES_DIR]:
+        plot_time_series(df, out_dir)
+        plot_correlation_heatmap(df, out_dir)
+        plot_government_comparison(df, out_dir)
+
+    export_report(df, corr_stats, REPORTS_DIR)
+    logger.info("Analysis complete. Output saved in '%s' and '%s'.", REPORTS_DIR, IMAGES_DIR)
 
 
 if __name__ == "__main__":
